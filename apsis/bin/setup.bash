@@ -1,0 +1,9 @@
+export PIPELINE=/Users/magee/Data/PIPELINE
+export DATASETS=$PIPELINE/DATASETS
+export INGEST=$PIPELINE/INGEST
+export PIPE=$HOME/Astro/ACS/pipeline
+export DUST_DIR=$PIPELINE
+export jref=$PIPELINE/reffiles/
+export NUMERIX=numpy
+export PATH=$PATH:$PIPE/bin
+export PYTHONPATH=$PYTHONPATH:$PIPE/lib/python:$PIPE/lib/python/apsis:$PIPE/lib/python/apsis/utils
