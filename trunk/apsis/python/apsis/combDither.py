@@ -1273,11 +1273,20 @@ class drizzleImage:
         del temphdr,tempfits
 
         for L in self.reflogfile_add:
-            self.logfile.write(L)          
-        wcstuples.append(('CD1_1', round(1e12*self.refcdmat['CD1_1'])/1.0e12))
-        wcstuples.append(('CD1_2', round(1e12*self.refcdmat['CD1_2'])/1.0e12))
-        wcstuples.append(('CD2_1', round(1e12*self.refcdmat['CD2_1'])/1.0e12))
-        wcstuples.append(('CD2_2', round(1e12*self.refcdmat['CD2_2'])/1.0e12))
+            self.logfile.write(L)
+            
+        if self.refcdmat['EXTREF']:
+        	cdmat = self.refcdmat
+
+        else:
+        	PA_final = self.refotherkeys['PA_FINAL']
+        	cdmat = matutil.makeCDdict(PA_final, self.asecpix)
+
+        wcstuples.append(('CD1_1', round(1e12*cdmat['CD1_1'])/1.0e12))
+        wcstuples.append(('CD1_2', round(1e12*cdmat['CD1_2'])/1.0e12))
+        wcstuples.append(('CD2_1', round(1e12*cdmat['CD2_1'])/1.0e12))
+        wcstuples.append(('CD2_2', round(1e12*cdmat['CD2_2'])/1.0e12))          
+
         for key in self.refotherkeys.keys():
             wcstuples.append((key, self.refotherkeys[key]))
     
