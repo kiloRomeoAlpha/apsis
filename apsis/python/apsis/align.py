@@ -1422,6 +1422,10 @@ class FitsFile:
         self.refcdmat['CD2_1'] = self.refwcs[0].wcs['CD2_1']
         self.refcdmat['CD1_2'] = self.refwcs[0].wcs['CD1_2']
         self.refcdmat['CD2_2'] = self.refwcs[0].wcs['CD2_2']
+        if self.simpleimage == 1:
+            self.refcdmat['EXTREF'] = 1
+        else
+            self.refcdmat['EXTREF'] = 0
         rf.close()            
 	del rf
 
