@@ -39,7 +39,7 @@ findpedest: arrays.o error.o  findpedest.c
 	$(CC) -g -o findpedest findpedest.c arrays.o error.o sort.o  -I${CFITSIO}/include -lm -L${CFITSIO}/lib -lcfitsio
 
 fillnoise: arrays.o error.o  fillnoise.c
-	$(CC) -g -o fillnoise fillnoise.c arrays.o error.o  mt19937ar.o -I${CFITSIO}/include -L${CFITSIO}/lib -lcfitsio
+	$(CC) -g -o fillnoise fillnoise.c arrays.o error.o  mt19937ar.o -I${CFITSIO}/include -lm -L${CFITSIO}/lib -lcfitsio
 
 whmedian: arrays.o whmedian.c
 	$(CC) -g -o whmedian whmedian.c arrays.o error.o  mt19937ar.o -I${CFITSIO}/include -lm -L${CFITSIO}/lib -lcfitsio
