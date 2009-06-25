@@ -1,0 +1,168 @@
+24/Jun/2008
+
+align_acs.inpar added.  This files is used by Rychard Bouwens & Dan
+Magee for the improved apsis.  It looks like an exact copy of align.par.
+(G. Meurer).
+
+27/Oct/2005 Changes --
+---
+adjustment of WEIGHT_THRESH parameter range from
+0,1.0e30
+
+to
+0,BIG
+
+under RHEL4.  The previous parameter, 1.0e30, was not
+evaluating as true in the SExtractor code.  This was
+likely caused by the switch to the new OS.
+
+This change is backwards compatible under the previous
+RHEL3.
+
+
+12/Nov/2003 Changes --
+---
+addition of new "richfield" and "sparsefield" inpar
+parameter sets for HRC and WFC.  These are just different
+deblend parameters for source extraction.  This only
+applies to wfc par sets.  No HRC parameters have been
+tuned for this.
+
+richfield:
+
+< DEBLEND_NTHRESH	8
+< DEBLEND_MINCONT	0.008
+---
+sparsefield:
+
+> DEBLEND_NTHRESH	16
+> DEBLEND_MINCONT	0.025
+
+
+15/Sep/2002 Changes --
+---
+In detectionCatalog.param uncomment output fields:
+
+X_WORLD
+Y_WORLD
+A_WORLD
+B_WORLD
+THETA_WORLD
+MAGERR_AUTO
+
+for accomodatation of aXe parameter requirements.
+---
+
+23/Apr/2002 Changes --
+---
+In catalog.inpar,detectionCatalog.inpar,filterCatalog.inpar:
+
+change phot apertures to:
+
+PHOT_APERTURES  2,3,4,6,8,10,14,20,28,40,60,80,100,160
+
+add:
+
+PHOT_FLUXFRAC   0.5,0.9
+
+---
+In catalog.param,detectionCatalog.param,filterCatalog.param:
+
+< FLUX_APER(20)
+< FLUXERR_APER(20)
+< MAG_APER(20)
+< MAGERR_APER(20)
+---
+> FLUX_APER(14)
+> FLUXERR_APER(14)
+> MAG_APER(14)
+> MAGERR_APER(14)
+> FLUX_RADIUS(2)
+
+---
+
+Then make separate inpar files for HRC and WFC:
+
+catalog_hrc.inpar  detectionCatalog_hrc.inpar  filterCatalog_hrc.inpar
+catalog_wfc.inpar  detectionCatalog_wfc.inpar  filterCatalog_wfc.inpar
+
+where the _wfc ones are the same as before (with the above changes),
+but _hrc ones make the following changes:
+
+  acs14% diff detectionCatalog_wfc.inpar detectionCatalog_hrc.inpar
+  < DETECT_MINAREA        6
+  < DETECT_THRESH 1.5
+  < ANALYSIS_THRESH       1.5
+  ---
+  > DETECT_MINAREA        9
+  > DETECT_THRESH 1.8
+  > ANALYSIS_THRESH       1.8
+  < FILTER_NAME   gauss_2.0_5x5.conv
+  ---
+  > FILTER_NAME   gauss_3.0_5x5.conv
+
+--
+
+19/June/2002: Changes to inpar files:
+
+detectionCatalog_hrc.inpar
+
+  < DEBLEND_NTHRESH       32
+  > DEBLEND_NTHRESH       8
+  
+  < DEBLEND_MINCONT       0.0015
+  > DEBLEND_MINCONT       0.008
+  
+  < SEEING_FWHM   0.125
+  > SEEING_FWHM   0.075
+
+
+filterCatalog_hrc.inpar
+
+  < DEBLEND_NTHRESH       32
+  > DEBLEND_NTHRESH       8
+  
+  < DEBLEND_MINCONT       0.0015
+  > DEBLEND_MINCONT       0.008
+  
+  < SEEING_FWHM   0.125
+  > SEEING_FWHM   0.075
+
+
+detectionCatalog_wfc.inpar
+
+  < DETECT_MINAREA        6
+  > DETECT_MINAREA        5
+
+  < DEBLEND_NTHRESH       32
+  > DEBLEND_NTHRESH       8
+  
+  < DEBLEND_MINCONT       0.0015
+  > DEBLEND_MINCONT       0.008
+  
+  < SEEING_FWHM   0.125
+  > SEEING_FWHM   0.105
+ 
+ 
+filterCatalog_wfc.inpar
+
+  < DETECT_MINAREA        6
+  > DETECT_MINAREA        5
+
+  < DEBLEND_NTHRESH       32
+  > DEBLEND_NTHRESH       8
+
+  < DEBLEND_MINCONT       0.0015
+  > DEBLEND_MINCONT       0.008
+
+  < SEEING_FWHM   0.125
+  > SEEING_FWHM   0.105
+ 
+
+align.inpar
+  < DEBLEND_NTHRESH       32
+  > DEBLEND_NTHRESH       16
+ 
+align_nebula.inpar
+  < DEBLEND_NTHRESH       32
+  > DEBLEND_NTHRESH       16
